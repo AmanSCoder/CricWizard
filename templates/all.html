@@ -1,28 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Rounder Entry</title>
-  </head>
-  <body>
-    <h2>So, it seems you want best All Rounder</h2>
-    <form action="/result" method="POST">
-      <div>How much strike rate should be:<input type="number" name="key1" /></div>
-      <br />
-      <div>
-        How much balling average should be:<input type="number" name="key2" />
-      </div>
-      <br />
-      <div>
-        How much batting average should be:<input type="number" name="key3" />
-      </div>
-      <br />
-      <div>
-        <input type="submit" value="Submit" />
-        <input type="reset" value="Reset Now" />
-      </div>
-    </form>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>All Rounder Entry</title>
+        <style>
+            header {
+            background-color: black; 
+            text-align: center; 
+            padding: 20px; 
+        }
+    
+        .footer {
+            color: #eee;
+            background: #111;
+            padding: 1rem 1rem;
+            font-size: 1.2rem;
+          }
+          .footer a {
+            color: var(--orange);
+          }</style>
+        <!-- Link Bootstrap stylesheet -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    </head>
+    <header class="header">
+        <img src="logo.png" alt="logo" style="width: 220px; height: auto;">
+        <h2 style="font-size: 20px; text-align: center; color: #fff; margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet nulla mollis, tempor magna et, fringilla nisl.</h2>
+    </header>
+    <body>
+        <h2>So, it seems you want the best All Rounder</h2>
+        <form action="/result" method="POST" onsubmit="return validateForm()">
+            <div>
+                How much strike rate should be: <input type="number" name="key1" id="key1" />
+                <span id="key1Error"></span>
+            </div>
+            <br>
+            <div>
+                What should be the balling average: <input type="number" name="key2" id="key2" />
+                <span id="key2Error"></span>
+            </div>
+            <br>
+            <div>
+                How much batting average should be: <input type="number" name="key3" id="key3" />
+                <span id="key3Error"></span>
+            </div>
+            <br>
+            <div>
+                <button type="submit" class="btn btn-primary" style="border-radius: 20px; padding-left: 130px; padding-right: 130px; background-color: green;">Submit</button>
+                <button type="reset" class="btn btn-primary" style="border-radius: 20px; padding-left: 130px; padding-right: 130px; background-color: rgb(133, 136, 220); margin-left: 150px">Reset</button>
+            </div>
+        </form>
+        <br>
+        <!-- footer section starts -->
+    <footer class="footer">
+        <table style="width: 100%">
+            <tr>
+                <td>
+                    <h3><strong> About Us </strong></h3>
+                    <hr style="border-top: 1px solid yellow; margin-top: 10px;">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </td>
+                
+            </tr>
+        </table>
+        <br>
+        <div class="bottom-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h5><strong>John Doe</strong></h5>
+                        <hr style="border-top: 1px solid yellow; margin-top: 30px;">
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-phone"></i><i class="fas fa-phone-alt"></i>555-111-1111</li>
+                            <li><a href="https://www.linkedin.com/in/johndoe/" class="text-light"><i class="fab fa-linkedin"></i> <i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+                            <li><a href="https://www.instagram.com/johndoe/" class="text-light"><i class="fab fa-instagram"></i> <i class="fab fa-instagram-square"></i> Instagram</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5><strong>Jane Smith</strong></h5>
+                        <hr style="border-top: 1px solid yellow; margin-top: 30px;">
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-phone"></i><i class="fas fa-phone-alt"></i>555-222-2222</li>
+                            <li><a href="https://www.linkedin.com/in/janesmith/" class="text-light"><i class="fab fa-linkedin"></i> <i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+                            <li><a href="https://www.instagram.com/janesmith/" class="text-light"><i class="fab fa-instagram"></i> <i class="fab fa-instagram-square"></i> Instagram</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5><strong>Bob Johnson</strong></h5>
+                        <hr style="border-top: 1px solid yellow; margin-top: 30px;">
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-phone"></i><i class="fas fa-phone-alt"></i>555-333-3333</li>
+                            <li><a href="https://www.linkedin.com/in/bobjohnson/" class="text-light"><i class="fab fa-linkedin"></i> <i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+                            <li><a href="https://www.instagram.com/bobjohnson/" class="text-light"><i class="fab fa-instagram"></i> <i class="fab fa-instagram-square"></i> Instagram</a></li>
+                        </ul>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        
+                        </footer>
+    
+
+  
+      <!-- footer section ends -->
+    <!-- Link Bootstrap script files -->
+    <script>
+        function validateForm() {
+            // Getting the values entered by the user
+            var key1 = document.getElementById("key1").value;
+            var key2 = document.getElementById("key2").value;
+            var key3 = document.getElementById("key3").value;
+        
+            // Checking if all fields are filled
+            if (key1 == '' || key2 == '' || key3 == '') {
+                alert('All fields are required!');
+                return false;
+            }
+        
+            // Checking if the entered values are integers and greater than or equal to 0
+            if (!Number.isInteger(Number(key1)) || Number(key1) < 0) {
+                document.getElementById("key1Error").innerHTML = "Key1 must be an integer greater than or equal to 0";
+                return false;
+            } else {
+                document.getElementById("key1Error").innerHTML = "";
+            }
+        
+            if (!Number.isInteger(Number(key2)) || Number(key2) < 0) {
+                document.getElementById("key2Error").innerHTML = "Key2 must be an integer greater than or equal to 0";
+                return false;
+            } else {
+                document.getElementById("key2Error").innerHTML = "";
+            }
+        
+            if (!Number.isInteger(Number(key3)) || Number(key3) < 0) {
+                document.getElementById("key3Error").innerHTML = "Key3 must be an integer greater than or equal to 0";
+                return false;
+            } else {
+                document.getElementById("key3Error").innerHTML = "";
+            }
+        
+            // If all conditions are satisfied, submit the form
+            return true;
+        }
+        </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-Ap
+    </body>
 </html>
