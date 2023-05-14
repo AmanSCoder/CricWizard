@@ -12,5 +12,5 @@ python app.py
 
 To access your flask application open new tab in and paste the url:
 ```
-https://{url_here}.pwskills.app:5000/
+https://{here_url}.pwskills.app:5000/
 ```
