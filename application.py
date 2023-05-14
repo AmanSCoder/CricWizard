@@ -5,10 +5,12 @@ import lxml
 app = Flask(__name__)
 
 @app.route("/",methods=['GET','POST'])
+@cross_origin()
 def home_page():
     return render_template("index.html")
 
 @app.route("/selection",methods=['POST'])
+@cross_origin()
 def selection_process():
     if(request.method=='POST'):
         global playerType
@@ -67,6 +69,7 @@ def selection_process():
 
 
 @app.route('/result',methods=['POST'])
+@cross_origin()
 def result_process():
     if(request.method=='POST'):
         key1=int(request.form['key1'])
