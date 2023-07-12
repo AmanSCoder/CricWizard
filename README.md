@@ -6,11 +6,11 @@
 To run flask application 
 
 ```
-python app.py
+flask run
 ```
 
 
 To access your flask application open new tab in and paste the url:
 ```
-https://{here_url}.pwskills.app:5000/
+https://localhost:5000/
 ```
