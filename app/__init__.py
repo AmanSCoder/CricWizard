@@ -1,6 +1,5 @@
 import os
 from typing import Mapping, Any
-
 from flask import Flask
 
 from . import main

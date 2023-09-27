@@ -1,7 +1,9 @@
 from enum import Enum
-
+from batsman_module import batsman_data
 from flask import Blueprint, render_template, request as req, flash, redirect, url_for
-
+import json
+links={}
+link={}
 
 class PlayerTypes(Enum):
     BATSMAN = "batsman"
@@ -21,6 +23,15 @@ def index():
 
     # POST method
     age, player = req.form["age"], req.form["player-type"]
+    global link
+    print("printing")
+    print(age)
+    print(player)
+    f=open('D:\Project upload\CricWizard\\app\links.json')
+    links=json.load(f)
+    link=links[str(age)]
+    print(link)
+
     error = None
     if not age or not player:
         error = "Both Age and Player type is needed"
@@ -36,6 +47,14 @@ def index():
 def player_info():
     from app.data import devs
     age, player_type = req.args.getlist("age"), req.args.getlist("player_type")
+    # print("printing")
+    # print(age)
+    # print(player_type)
+    # f=open('D:\Project upload\CricWizard\\app\links.json')
+    # links=json.load(f)
+    # link=links[str(age[0])]
+    # print(link)
+
 
     # data check
     player_type = player_type if player_type else PlayerTypes.ALLROUNDER.value
@@ -51,12 +70,13 @@ def result():
 
     # get data from url
     player_type = req.args.getlist("player_type")
-
+    age=req.args.getlist("age")
     # data check
     player_type = player_type if player_type else PlayerTypes.ALLROUNDER.value
     if isinstance(player_type, list):
         player_type = player_type[0]
-
+    
+    exact_link=link[player_type.capitalize()]
     match player_type:
         case PlayerTypes.BATSMAN.value:
             data = {
@@ -64,6 +84,8 @@ def result():
                 "strike-rate": req.args.getlist("strike-rate"),
                 "balls-faced": req.args.getlist("balls-faced")
             }
+            tabledata=batsman_data(exact_link,data)
+            print(tabledata)
 
         case PlayerTypes.ALLROUNDER.value:
             data = {
@@ -84,7 +106,7 @@ def result():
                 "economy": req.args.getlist("economy"),
                 "avg": req.args.getlist("avg")
             }
-
+    
     print(data)
 
     return render_template("main/results.html", devs=devs)
