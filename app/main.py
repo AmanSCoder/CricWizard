@@ -1,5 +1,6 @@
 from enum import Enum
 from batsman_module import batsman_data
+from bowler_module import bowler_data
 from flask import Blueprint, render_template, request as req, flash, redirect, url_for
 import json
 links={}
@@ -27,7 +28,7 @@ def index():
     print("printing")
     print(age)
     print(player)
-    f=open(r"C:\Users\ssyed\OneDrive\Desktop\CRIC\CricWizard-main\app\links.json")
+    f=open(r"D:\Project upload\CricWizard\app\links.json")
     links=json.load(f)
     link=links[str(age)]
     print(link)
@@ -106,6 +107,7 @@ def result():
                 "economy": req.args.getlist("economy"),
                 "avg": req.args.getlist("avg")
             }
+            tabledata=bowler_data(exact_link,data)
     
     print(data)
 
