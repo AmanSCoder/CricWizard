@@ -27,7 +27,7 @@ def index():
     print("printing")
     print(age)
     print(player)
-    f=open('D:\Project upload\CricWizard\\app\links.json')
+    f=open(r"C:\Users\ssyed\OneDrive\Desktop\CRIC\CricWizard-main\app\links.json")
     links=json.load(f)
     link=links[str(age)]
     print(link)
