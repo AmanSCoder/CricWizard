@@ -1,5 +1,5 @@
 import pandas as pd
-def wicketkeeperdata(keeper_link,batsman_link,data):
+def wicketkeeper_data(keeper_link,batsman_link,data):
     keeper_url=pd.read_html(keeper_link)
     df_keeper=keeper_url[0]
     batting_url=pd.read_html(batsman_link)
