@@ -1,6 +1,10 @@
 from enum import Enum
+
 from batsman_module import batsman_data
 from bowler_module import bowler_data
+from allrounder_module import allrounder_data
+from wicketkeeper_module import wicketkeeper_data
+
 from flask import Blueprint, render_template, request as req, flash, redirect, url_for
 import json
 links={}
@@ -28,7 +32,7 @@ def index():
     print("printing")
     print(age)
     print(player)
-    f=open(r"D:\Project upload\CricWizard\app\links.json")
+    f=open(r"/home/aman/new_folder/cricwizard/app/links.json")
     links=json.load(f)
     link=links[str(age)]
     print(link)
@@ -77,7 +81,7 @@ def result():
     if isinstance(player_type, list):
         player_type = player_type[0]
     
-    exact_link=link[player_type.capitalize()]
+    
     match player_type:
         case PlayerTypes.BATSMAN.value:
             data = {
@@ -85,21 +89,26 @@ def result():
                 "strike-rate": req.args.getlist("strike-rate"),
                 "balls-faced": req.args.getlist("balls-faced")
             }
+            exact_link=link[player_type.capitalize()]
             tabledata=batsman_data(exact_link,data)
             print(tabledata)
 
         case PlayerTypes.ALLROUNDER.value:
             data = {
-                "wickets-taken": req.args.getlist("wickets-taken"),
-                "economy": req.args.getlist("economy"),
-                "avg": req.args.getlist("avg")
+                "wickets-taken": req.args.getlist("strike-rate"),
+                "economy": req.args.getlist("ball-avg"),
+                "avg": req.args.getlist("bat-avg")
             }
+            tabledata=allrounder_data(link['Batsman'],link['Bowler'],data)
+            print(tabledata)
         case PlayerTypes.WICKETKEEPER.value:
             data = {
                 "dismissals": req.args.getlist("dismissals"),
                 "avg": req.args.getlist("avg"),
                 "strike-rate": req.args.getlist("strike-rate")
             }
+            tabledata=wicketkeeper_data(link['Wicketkeeper'],link['Batsman'],data)
+            print(tabledata)
         case _:
             # bowler data
             data = {
@@ -107,8 +116,9 @@ def result():
                 "economy": req.args.getlist("economy"),
                 "avg": req.args.getlist("avg")
             }
+            exact_link=link[player_type.capitalize()]
             tabledata=bowler_data(exact_link,data)
-    
+            print(tabledata)
     print(data)
 
     return render_template("main/results.html", devs=devs)
