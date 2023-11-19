@@ -1,6 +1,8 @@
 import os
 from typing import Mapping, Any
+
 from flask import Flask
+from flask_assets import Bundle, Environment
 
 from . import main
 
@@ -24,6 +26,13 @@ def create_app(test_config: Mapping[str, Any] | None = None) -> Flask:
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    # bundle and add assets to flask app
+    assets = Environment(app)
+    css = Bundle("src/input.css", output="dist/output.css")
+
+    assets.register("css", css)
+    css.build()
 
     # register the blueprint from the factory
     app.register_blueprint(main.bp)
