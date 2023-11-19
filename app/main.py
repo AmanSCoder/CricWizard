@@ -1,124 +1,82 @@
 from enum import Enum
 
-from batsman_module import batsman_data
-from bowler_module import bowler_data
-from allrounder_module import allrounder_data
-from wicketkeeper_module import wicketkeeper_data
-
 from flask import Blueprint, render_template, request as req, flash, redirect, url_for
-import json
-links={}
-link={}
+
+from app.data import devs, links
+from fetch_data import fetch_batsman_data, fetch_bowler_data, fetch_all_rounder_data, fetch_wicket_keeper_data
+
 
 class PlayerTypes(Enum):
     BATSMAN = "batsman"
     BOWLER = "bowler"
     WICKETKEEPER = "wicketkeeper"
-    ALLROUNDER = "allrounder"
+    ALL_ROUNDER = "allrounder"
 
 
 bp = Blueprint("main", __name__)
 
 
-@bp.route("/", methods=("GET", "POST"))
+@bp.route("/")
 def index():
-    from app.data import devs
-    if req.method == "GET":
-        return render_template("main/index.html", devs=devs)
-
-    # POST method
-    age, player = req.form["age"], req.form["player-type"]
-    global link
-    print("printing")
-    print(age)
-    print(player)
-    f=open(r"/home/aman/new_folder/cricwizard/app/links.json")
-    links=json.load(f)
-    link=links[str(age)]
-    print(link)
-
-    error = None
-    if not age or not player:
-        error = "Both Age and Player type is needed"
-    # if error occurs, then flash the error on screen and redirect
-    if error:
-        flash(error)
-        return render_template("main/index.html", devs=devs)
-
-    return redirect(url_for("main.player_info", age=age, player_type=player))
+    return render_template(
+        "main/index.html",
+        devs=devs,
+        years=links.keys()
+    )
 
 
 @bp.route("/player-info")
 def player_info():
-    from app.data import devs
-    age, player_type = req.args.getlist("age"), req.args.getlist("player_type")
-    # print("printing")
-    # print(age)
-    # print(player_type)
-    # f=open('D:\Project upload\CricWizard\\app\links.json')
-    # links=json.load(f)
-    # link=links[str(age[0])]
-    # print(link)
+    year, player_type = req.args.get("year"), req.args.get("player-type")
+    all_player_types = [player.value for player in PlayerTypes]
+    if year not in links or player_type not in all_player_types:
+        flash("Both Year and Player Type are needed and should be valid")
+        return redirect(url_for("main.index"))
+
+    return render_template(
+        "main/player-info.html",
+        devs=devs,
+        player_type=player_type,
+        year=year
+    )
 
 
-    # data check
-    player_type = player_type if player_type else PlayerTypes.ALLROUNDER.value
-    if isinstance(player_type, list):
-        player_type = player_type[0]
-
-    return render_template("main/player-info.html", devs=devs, player_type=player_type)
-
-
-@bp.route("/result")
+@bp.route("/result", methods=("GET", "POST"))
 def result():
-    from app.data import devs
-
-    # get data from url
-    player_type = req.args.getlist("player_type")
-    age=req.args.getlist("age")
-    # data check
-    player_type = player_type if player_type else PlayerTypes.ALLROUNDER.value
-    if isinstance(player_type, list):
-        player_type = player_type[0]
-    
-    
+    year, player_type = req.form["year"], req.form["player-type"]
+    link = links[year]
     match player_type:
         case PlayerTypes.BATSMAN.value:
             data = {
-                "avg": req.args.getlist("avg"),
-                "strike-rate": req.args.getlist("strike-rate"),
-                "balls-faced": req.args.getlist("balls-faced")
+                "avg": req.form["avg"],
+                "strike-rate": req.form["strike-rate"],
+                "balls-faced": req.form["balls-faced"]
             }
-            exact_link=link[player_type.capitalize()]
-            tabledata=batsman_data(exact_link,data)
-            print(tabledata)
+            tabledata = fetch_batsman_data(link[player_type], data)
 
-        case PlayerTypes.ALLROUNDER.value:
+        case PlayerTypes.ALL_ROUNDER.value:
             data = {
-                "wickets-taken": req.args.getlist("strike-rate"),
-                "economy": req.args.getlist("ball-avg"),
-                "avg": req.args.getlist("bat-avg")
+                "wickets-taken": req.form["strike-rate"],
+                "economy": req.form["ball-avg"],
+                "avg": req.form["bat-avg"]
             }
-            tabledata=allrounder_data(link['Batsman'],link['Bowler'],data)
-            print(tabledata)
+            tabledata = fetch_all_rounder_data(link["batsman"], link["bowler"], data)
+
         case PlayerTypes.WICKETKEEPER.value:
             data = {
-                "dismissals": req.args.getlist("dismissals"),
-                "avg": req.args.getlist("avg"),
-                "strike-rate": req.args.getlist("strike-rate")
+                "dismissals": req.form["dismissals"],
+                "avg": req.form["avg"],
+                "strike-rate": req.form["strike-rate"]
             }
-            tabledata=wicketkeeper_data(link['Wicketkeeper'],link['Batsman'],data)
-            print(tabledata)
+            tabledata = fetch_wicket_keeper_data(link['wicketkeeper'], link['batsman'], data)
+
         case _:
             # bowler data
             data = {
-                "wickets-taken": req.args.getlist("wickets-taken"),
-                "economy": req.args.getlist("economy"),
-                "avg": req.args.getlist("avg")
+                "wickets-taken": req.form["wickets-taken"],
+                "economy": req.form["economy"],
+                "avg": req.form["avg"]
             }
-            exact_link=link[player_type.capitalize()]
-            tabledata=bowler_data(exact_link,data)
-            print(tabledata)
-    print(data)
+            tabledata = fetch_bowler_data(link[player_type], data)
 
-    return render_template("main/results.html", devs=devs)
+    return render_template("main/results.html", devs=devs, tabledata=tabledata)
