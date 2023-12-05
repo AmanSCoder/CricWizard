@@ -12,9 +12,6 @@ lazy-object-proxy==1.6.0
 lxml==4.9.3
 MarkupSafe==2.1.1
 mccabe==0.7.0
-mkl-fft
-mkl-random
-mkl-service==2.4.0
 numexpr==2.8.7
 numpy==1.24.3
 pandas==2.1.1
