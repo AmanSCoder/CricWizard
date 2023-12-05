@@ -3,7 +3,7 @@ from enum import Enum
 from flask import Blueprint, render_template, request as req, flash, redirect, url_for
 
 from app.data import devs, links
-from fetch_data import fetch_batsman_data, fetch_bowler_data, fetch_all_rounder_data, fetch_wicket_keeper_data
+from app.fetch_data import fetch_batsman_data, fetch_bowler_data, fetch_all_rounder_data, fetch_wicket_keeper_data
 
 
 class PlayerTypes(Enum):
