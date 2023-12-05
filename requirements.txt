@@ -29,3 +29,4 @@ webassets==2.0
 Werkzeug==2.2.3
 wheel==0.41.2
 wrapt==1.14.1
+waitress==2.1.2
