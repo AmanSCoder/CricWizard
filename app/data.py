@@ -2,13 +2,13 @@ devs = [
     {
         "avatar": "images/devs/aman.jpg",
         "name": "Aman",
-        "role": "Project ML Lead",
+        "role": "Backend and Devops",
         "linkedin": "https://www.linkedin.com/in/aman-srivastava-b60594245/",
         "github": "https://github.com/amanscoder"
     }, {
         "avatar": "images/devs/naved.jpg",
         "name": "Naved",
-        "role": "Project Lead",
+        "role": "Backend Lead",
         "linkedin": "https://www.linkedin.com/in/syed-naved-b697aa24b/",
         "github": "https://github.com/snaved12"
     }, {

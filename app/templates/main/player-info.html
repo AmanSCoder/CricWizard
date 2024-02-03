@@ -34,7 +34,7 @@
 
     <form action="/result" method="POST" class="space-y-8">
       <h1 class="text-xl lg:text-4xl font-semibold">
-        Some info about {% if player_type == "wicketkeeper" %} Wicket-Keeper {% elif player_type == "allrounder" %}
+        Select Stats for desired {% if player_type == "wicketkeeper" %} Wicket-Keeper {% elif player_type == "allrounder" %}
         All-Rounder {% else %} {{ player_type }} {% endif %} ...
       </h1>
       <input
@@ -51,7 +51,7 @@
                 for="avg"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Average of player
+              Batting Average
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
@@ -68,7 +68,7 @@
                 for="strike-rate"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Strike rate
+              Batting Strike rate
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
@@ -103,7 +103,7 @@
                 for="wickets-taken"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Wicket taken
+              Number of Wicket taken
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
@@ -120,7 +120,7 @@
                 for="economy"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Economy
+              Bowling Economy
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
@@ -137,7 +137,7 @@
                 for="avg"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Average of player:
+              Batting Average
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
@@ -172,7 +172,7 @@
                 for="avg"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Average
+              Batting Average
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
@@ -189,7 +189,7 @@
                 for="strike-rate"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Strike Rate
+              Batting Strike Rate
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
@@ -207,7 +207,7 @@
                 for="strike-rate"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Strike rate
+              Batting Strike rate
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
@@ -224,7 +224,7 @@
                 for="ball-avg"
                 class="block text-sm lg:text-base font-medium leading-6 text-gray-900"
             >
-              Balling Average
+              Bowling Average
             </label>
             <div class="relative rounded-md shadow-sm">
               <input
