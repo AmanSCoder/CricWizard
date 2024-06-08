@@ -35,7 +35,7 @@ To run CricWizard locally, follow these steps:
 
     ```bash
     git clone https://github.com/AmanSCoder/CricWizard.git
-    cd CricWizard/backend
+    cd CricWizard/app
     ```
 
 2. Create a virtual environment:
@@ -62,7 +62,7 @@ To run CricWizard locally, follow these steps:
 1. Navigate to the frontend directory:
 
     ```bash
-    cd ../frontend
+    cd ../app
     ```
 
 2. Install dependencies:
@@ -96,13 +96,10 @@ We welcome contributions! Follow these steps to contribute:
 5. Push to the branch (`git push origin feature/your-feature-name`).
 6. Create a new Pull Request.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## Contact
 
-For any inquiries or feedback, please contact us at support@cricwizard.com.
+For any inquiries or feedback, please contact us at amansrivastava7969@gmail.com.
 
 ---
 
