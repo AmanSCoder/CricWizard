@@ -1,4 +1,4 @@
-[![CricWizard | Web Scraping Project | Cricket Data Analysis]()](https://youtu.be/2dhHEnaDbzA)
+[![CricWizard | Web Scraping Project | Cricket Data Analysis](https://youtu.be/2dhHEnaDbzA)](https://youtu.be/2dhHEnaDbzA)
 
 # CricWizard
 
