@@ -1,5 +1,3 @@
-[![CricWizard | Web Scraping Project | Cricket Data Analysis]](https://youtu.be/2dhHEnaDbzA)
-
 # CricWizard
 
 Welcome to CricWizard! CricWizard is a web application that fetches data from the ESPN website for T20 cricket matches and allows users to filter and find players based on specific criteria. 
